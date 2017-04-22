@@ -1,0 +1,321 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/ChaosEvoker/html-to-pdf">html-to-pdf (v0.1.11)</a>
+</h1>
+<h4>A Node HTML to PDF converter using a the Java flyingsaucer library.</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.html-to-pdf">module html-to-pdf</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.html-to-pdf.convertHTMLFile">
+            function <span class="apidocSignatureSpan">html-to-pdf.</span>convertHTMLFile
+            <span class="apidocSignatureSpan">(htmlPath, pdfPath, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.html-to-pdf.convertHTMLString">
+            function <span class="apidocSignatureSpan">html-to-pdf.</span>convertHTMLString
+            <span class="apidocSignatureSpan">(html, pdfPath, callback)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.html-to-pdf.setDebug">
+            function <span class="apidocSignatureSpan">html-to-pdf.</span>setDebug
+            <span class="apidocSignatureSpan">(newDebug)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.html-to-pdf.setInputEncoding">
+            function <span class="apidocSignatureSpan">html-to-pdf.</span>setInputEncoding
+            <span class="apidocSignatureSpan">(enc)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.html-to-pdf.setOutputEncoding">
+            function <span class="apidocSignatureSpan">html-to-pdf.</span>setOutputEncoding
+            <span class="apidocSignatureSpan">(enc)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.html-to-pdf" id="apidoc.module.html-to-pdf">module html-to-pdf</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.html-to-pdf.convertHTMLFile" id="apidoc.element.html-to-pdf.convertHTMLFile">
+        function <span class="apidocSignatureSpan">html-to-pdf.</span>convertHTMLFile
+        <span class="apidocSignatureSpan">(htmlPath, pdfPath, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">convertHTMLFile = function (htmlPath, pdfPath, callback) {
+    var args = ['-jar', __dirname + '/PDFRenderer.jar'];
+    if (inputEncoding !== null) {
+        args.push('--input-encoding', inputEncoding);
+    }
+    if (outputEncoding !== null) {
+        args.push('--output-encoding', outputEncoding);
+    }
+    args.push(htmlPath, pdfPath);
+    var renderer = child_process.spawn('java', args);
+    renderer.on('error', function (error) {
+        callback(error);
+    });
+    if (debug) {
+        renderer.stdout.on('data', function (data) {
+            console.log('STDOUT: ' + data);
+        });
+        renderer.stderr.on('data', function (data) {
+            console.log('STDERR: ' + data);
+        });
+    }
+    renderer.on('exit', function (code) {
+        callback(null, {process_code: code});
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+To use html-to-pdf in your Node application, just require it:
+```js
+var htmlToPdf = require('html-to-pdf');
+```
+### HTML File Conversion Example ###
+You can use `convertHTMLFile` to convert HTML files to PDFs. Simply provide a path to a source HTML file and a path to a destination
+ PDF file for conversion.
+```js
+htmlToPdf.<span class="apidocCodeKeywordSpan">convertHTMLFile</span>('path/to/source.html', 'path/to/destination.
+pdf',
+function (error, success) {
+   if (error) {
+        console.log('Oh noes! Errorz!');
+        console.log(error);
+    } else {
+        console.log('Woot! Success!');
+        console.log(success);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.html-to-pdf.convertHTMLString" id="apidoc.element.html-to-pdf.convertHTMLString">
+        function <span class="apidocSignatureSpan">html-to-pdf.</span>convertHTMLString
+        <span class="apidocSignatureSpan">(html, pdfPath, callback)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">convertHTMLString = function (html, pdfPath, callback) {
+    var self = this, uniqueID = UUIDGenerator.v4();
+    fs.writeFile(uniqueID + '.html', html, function (err) {
+        if (err) {
+            callback(err)
+        } else {
+            self.convertHTMLFile(uniqueID + '.html', pdfPath, function (error, results) {
+                if (error) {
+                    callback(error);
+                } else {
+                    fs.unlink(uniqueID + '.html', function (deleteError) {
+                        if (deleteError) {
+                            callback(deleteError);
+                        } else {
+                            callback(null, results);
+                        }
+                    });
+                }
+            });
+        }
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+);
+```
+### HTML String Conversion Example ###
+You can use `convertHTMLString` to turn a string of HTML into a PDF file. Simply pass in a string of HTML and a path to a destination
+ PDF file for conversion. This is useful for using other templating languages (like Jade or Mustache) where you can convert the
+template into HTML and then use this to convert it to a PDF.
+```js
+var html = ...; //Some HTML String from code above
+
+htmlToPdf.<span class="apidocCodeKeywordSpan">convertHTMLString</span>(html, 'path/to/destination.pdf',
+function (error, success) {
+    if (error) {
+        console.log('Oh noes! Errorz!');
+        console.log(error);
+    } else {
+        console.log('Woot! Success!');
+        console.log(success);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.html-to-pdf.setDebug" id="apidoc.element.html-to-pdf.setDebug">
+        function <span class="apidocSignatureSpan">html-to-pdf.</span>setDebug
+        <span class="apidocSignatureSpan">(newDebug)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setDebug = function (newDebug) {
+    debug = newDebug;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        }
+    }
+);
+```
+### Debug Mode ###
+If you want to see the output you can set debug mode to true to see the output of the PDF Renderer (debug is false by default):
+```js
+htmlToPdf.<span class="apidocCodeKeywordSpan">setDebug</span>(true);
+```
+
+### Encoding Settings ###
+If using a particular encoding type is important to getting the output you want, you can set the encoding types for both the input
+ and output:
+```js
+htmlToPdf.setInputEncoding('UTF-8');
+htmlToPdf.setOutputEncoding('UTF-8');
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.html-to-pdf.setInputEncoding" id="apidoc.element.html-to-pdf.setInputEncoding">
+        function <span class="apidocSignatureSpan">html-to-pdf.</span>setInputEncoding
+        <span class="apidocSignatureSpan">(enc)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setInputEncoding = function (enc) {
+    inputEncoding = enc;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```js
+htmlToPdf.setDebug(true);
+```
+
+### Encoding Settings ###
+If using a particular encoding type is important to getting the output you want, you can set the encoding types for both the input
+ and output:
+```js
+htmlToPdf.<span class="apidocCodeKeywordSpan">setInputEncoding</span>('UTF-8');
+htmlToPdf.setOutputEncoding('UTF-8');
+```
+Thanks to bplaa-yai for this feature!
+
+## Heads Up ##
+html-to-pdf uses a Java process in the background. That means you will need Java installed to use it. Additionally, the Java process
+ utilizes a library called flyingsaucer:
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.html-to-pdf.setOutputEncoding" id="apidoc.element.html-to-pdf.setOutputEncoding">
+        function <span class="apidocSignatureSpan">html-to-pdf.</span>setOutputEncoding
+        <span class="apidocSignatureSpan">(enc)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">setOutputEncoding = function (enc) {
+    outputEncoding = enc;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+htmlToPdf.setDebug(true);
+```
+
+### Encoding Settings ###
+If using a particular encoding type is important to getting the output you want, you can set the encoding types for both the input
+ and output:
+```js
+htmlToPdf.setInputEncoding('UTF-8');
+htmlToPdf.<span class="apidocCodeKeywordSpan">setOutputEncoding</span>('UTF-8');
+```
+Thanks to bplaa-yai for this feature!
+
+## Heads Up ##
+html-to-pdf uses a Java process in the background. That means you will need Java installed to use it. Additionally, the Java process
+ utilizes a library called flyingsaucer:
+
+https://github.com/flyingsaucerproject/flyingsaucer
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>

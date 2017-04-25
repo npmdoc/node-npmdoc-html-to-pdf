@@ -147,23 +147,22 @@
     });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-To use html-to-pdf in your Node application, just require it:
-```js
-var htmlToPdf = require(&#x27;html-to-pdf&#x27;);
-```
-### HTML File Conversion Example ###
-You can use `convertHTMLFile` to convert HTML files to PDFs. Simply provide a path to a source HTML file and a path to a destination
- PDF file for conversion.
-```js
-htmlToPdf.<span class="apidocCodeKeywordSpan">convertHTMLFile</span>(&#x27;path/to/source.html&#x27;, &#x27;path/to/destination.
-pdf&#x27;,
-function (error, success) {
-   if (error) {
-        console.log(&#x27;Oh noes! Errorz!&#x27;);
-        console.log(error);
+
+exports.convertHTMLString = function (html, pdfPath, callback) {
+var self = this, uniqueID = UUIDGenerator.v4();
+fs.writeFile(uniqueID + &#x27;.html&#x27;, html, function (err) {
+    if (err) {
+        callback(err)
     } else {
-        console.log(&#x27;Woot! Success!&#x27;);
-        console.log(success);
+        self.<span class="apidocCodeKeywordSpan">convertHTMLFile</span>(uniqueID + &#x27;.html&#x27;, pdfPath, function (error,
+results) {
+            if (error) {
+                callback(error);
+            } else {
+                fs.unlink(uniqueID + &#x27;.html&#x27;, function (deleteError) {
+                    if (deleteError) {
+                        callback(deleteError);
+                    } else {
 ...</pre></li>
     </ul>
 

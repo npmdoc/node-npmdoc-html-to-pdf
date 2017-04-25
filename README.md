@@ -1,6 +1,6 @@
 # npmdoc-html-to-pdf
 
-#### api documentation for  [html-to-pdf (v0.1.11)](https://github.com/ChaosEvoker/html-to-pdf)  [![npm package](https://img.shields.io/npm/v/npmdoc-html-to-pdf.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-html-to-pdf) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-html-to-pdf.svg)](https://travis-ci.org/npmdoc/node-npmdoc-html-to-pdf)
+#### basic api documentation for  [html-to-pdf (v0.1.11)](https://github.com/ChaosEvoker/html-to-pdf)  [![npm package](https://img.shields.io/npm/v/npmdoc-html-to-pdf.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-html-to-pdf) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-html-to-pdf.svg)](https://travis-ci.org/npmdoc/node-npmdoc-html-to-pdf)
 
 #### A Node HTML to PDF converter using a the Java flyingsaucer library.
 
